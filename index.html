@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Clearviction Code Test</title>
+    <meta name="description" content="A web page and form for the code test.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./favicon.ico">
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@0.7.4/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@0.7.4/dist/utilities.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <main class="h-screen flex flex-col items-center justify-center p-2">
+      <div class="w-full max-w-sm">
+        <!-- <form id="form" action="https://cv-devs-temp-challenge.vercel.app/api/challenge" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8"> -->
+        <form id="form" class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email Address</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" id="email" name="email" type="email" maxLength={200} required />
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="repo">Github Repo URL</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" id="repo" name="repo" type="url" maxLength={500} required />
+          </div>
+          <button class="bg-grey-darker hover:bg-grey-darkest text-white font-bold py-2 px-4 rounded focus:shadow-outline" type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+    <script>
+      const form = document.getElementById("form");
+      
+      if (form) {
+        console.log("Ready to submit");
+
+        async function submitForm() {
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch("https://cv-devs-temp-challenge.vercel.app/api/challenge", {
+              method: "POST",
+              body: formData,
+            });
+            console.log(await response.json());
+          } catch (e) {
+            console.error(e);
+          }
+        }
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          submitForm();
+        });
+      }
+    </script>
+  </body>
+</html>
